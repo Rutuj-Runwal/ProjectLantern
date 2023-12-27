@@ -3,7 +3,7 @@ const router = Router();
 
 // Product Routes
 router.get("/product", (req, res) => {
-  res.send(200).json({ message: "Get all products!" });
+  res.status(200).json({ message: "Get all products!" });
 });
 
 router.get("/product:id", (req, res) => {
