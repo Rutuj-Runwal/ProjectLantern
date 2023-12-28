@@ -3,7 +3,7 @@ import router from "./router";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { protect } from "./modules/auth";
-import { createNewUser } from "./handlers/user";
+import { createNewUser, signInUser } from "./handlers/user";
 dotenv.config();
 
 const app = express();
@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", protect, router);
 app.use("/signup", createNewUser);
+app.use("/signin", signInUser);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
