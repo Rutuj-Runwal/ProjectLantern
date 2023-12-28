@@ -2,6 +2,7 @@ import express from "express";
 import router from "./router";
 import cors from "cors";
 import * as dotenv from "dotenv";
+import { protect } from "./modules/auth";
 dotenv.config();
 
 const app = express();
@@ -16,7 +17,7 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.use("/api", router);
+app.use("/api", protect, router);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
