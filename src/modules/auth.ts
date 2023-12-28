@@ -13,6 +13,12 @@ export const protect = (req: any, res: any, next: any) => {
   // Get Authorization Bearer
   const bearer = req.headers.authorization;
 
+  if (!bearer) {
+    res.status(401);
+    res.send("Not authorized");
+    return;
+  }
+
   const token = bearer.split(" ")[1]; // Get JWT token: "Bearer token"
 
   if (!token) {
