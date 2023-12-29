@@ -15,7 +15,7 @@ router.post("/product", (req, res) => {
 });
 
 router.put("/product:id", (req, res) => {
-  res.json({ message: "Update prdoct with id" });
+  res.json({ message: "Update product with id" });
 });
 
 router.delete("/product:id", (req, res) => {
