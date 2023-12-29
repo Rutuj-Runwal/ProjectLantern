@@ -96,14 +96,14 @@ export type Product = z.infer<typeof ProductSchema>;
 
 export const UpdateSchema = z.object({
   status: UPDATE_STATUSSchema,
-  id: z.string().uuid(),
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
+  id: z.string().uuid().optional(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
   title: z.string(),
   body: z.string(),
-  version: z.string().nullable(),
-  asset: z.string(),
-  productId: z.string(),
+  version: z.string().nullish(),
+  asset: z.string().nullish(),
+  productId: z.string().optional(),
 });
 
 export type Update = z.infer<typeof UpdateSchema>;
