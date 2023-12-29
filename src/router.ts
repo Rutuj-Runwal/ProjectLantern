@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { handleInputValidation } from "./util/validation";
-import { ProductSchema } from "../prisma/zod";
+import {
+  handleInputValidation,
+  handleInputValidations,
+} from "./util/validation";
+import { ProductSchema, UpdateSchema } from "../prisma/zod";
 const router = Router();
 
 // Product Routes
@@ -37,9 +40,33 @@ router.get("/update", (req, res) => {});
 
 router.get("/update/:id", (req, res) => {});
 
-router.post("/update", (req, res) => {});
+router.post(
+  "/update",
+  handleInputValidations(UpdateSchema, [
+    "title",
+    "body",
+    "status",
+    "version",
+    "asset",
+  ]),
+  (req, res) => {
+    res.json({ message: "Added update to db" });
+  }
+);
 
-router.put("/update/:id", (req, res) => {});
+router.put(
+  "/update/:id",
+  handleInputValidations(UpdateSchema, [
+    "title",
+    "body",
+    "status",
+    "version",
+    "asset",
+  ]),
+  (req, res) => {
+    res.json({ message: "update set" });
+  }
+);
 
 router.delete("/update/:id", (req, res) => {});
 
