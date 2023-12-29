@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { handleInputValidation } from "./util/validation";
+import { ProductSchema } from "../prisma/zod";
 const router = Router();
 
 // Product Routes
@@ -10,9 +12,13 @@ router.get("/product:id", (req, res) => {
   res.json({ message: "Get prodcut with id!" });
 });
 
-router.post("/product", (req, res) => {
-  res.json({ message: "Add a product" });
-});
+router.post(
+  "/product",
+  handleInputValidation(ProductSchema, "name"),
+  (req, res) => {
+    res.json({ message: "Add a product" });
+  }
+);
 
 router.put("/product:id", (req, res) => {
   res.json({ message: "Update product with id" });
