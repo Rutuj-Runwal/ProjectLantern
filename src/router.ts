@@ -20,9 +20,13 @@ router.post(
   }
 );
 
-router.put("/product:id", (req, res) => {
-  res.json({ message: "Update product with id" });
-});
+router.put(
+  "/product:id",
+  handleInputValidation(ProductSchema, "name"),
+  (req, res) => {
+    res.json({ message: "Update product with id" });
+  }
+);
 
 router.delete("/product:id", (req, res) => {
   res.json({ message: "Delete prodcut with id" });
