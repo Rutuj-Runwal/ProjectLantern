@@ -13,3 +13,31 @@ export const handleInputValidation =
       return;
     }
   };
+
+export const handleInputValidations =
+  (ZOD_SCHEMA: any, fields: Array<string>) =>
+  (req: any, res: any, next: any) => {
+    const userInput: any = {};
+    for (var indx in fields) {
+      userInput[fields[indx]] = req.body[fields[indx]];
+    }
+
+    const validation = ZOD_SCHEMA.safeParse(userInput);
+
+    if (validation.success) {
+      req.body.validation = validation;
+      next();
+    } else {
+      const validationIssues = validation.error.issues;
+      // Build error log
+      const data: any = {};
+      console.log(validationIssues);
+      for (var indx in validationIssues) {
+        data[validationIssues[indx].path[0]] = validationIssues[indx].message;
+      }
+
+      res.status(403).json({ message: data });
+
+      return;
+    }
+  };
