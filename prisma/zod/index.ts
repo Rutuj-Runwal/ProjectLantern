@@ -82,10 +82,10 @@ export type User = z.infer<typeof UserSchema>;
 /////////////////////////////////////////
 
 export const ProductSchema = z.object({
-  id: z.string().uuid(),
-  createdAt: z.coerce.date(),
+  id: z.string().uuid().optional(),
+  createdAt: z.coerce.date().optional(),
   name: z.string(),
-  belongsToId: z.string(),
+  belongsToId: z.string().optional(),
 });
 
 export type Product = z.infer<typeof ProductSchema>;
